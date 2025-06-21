@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Météo</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🌤️ Application météo</h1>
+    <form action="/search" method="POST">
+      <input type="text" id="location" name="location" value="<%= location %>" placeholder="Entrez un lieu (ex: fribourg)" required>
+      <button type="submit">Rechercher</button>
+    </form>
+    <% if (error) { %>
+      <div class="error"><%= error %></div>
+    <% } %>
+    <% if (data && data.result) { %>
+      <% data.result.forEach(function(city) { %>
+        <div class="city-block">
+          <div class="city-header">
+            <h2><%= city.location.name %></h2>
+          </div>
+          <div class="current">
+            <span><strong>Température :</strong> <%= city.current.temperature %>°C</span> |
+            <span><strong>Ressenti :</strong> <%= city.current.feelslike %>°C</span> |
+            <span><strong>Ciel :</strong> <%= city.current.skytext %></span> |
+            <span><strong>Humidité :</strong> <%= city.current.humidity %>%</span> |
+            <span><strong>Vent :</strong> <%= city.current.winddisplay %></span>
+          </div>
+          <div>
+            <strong>Prévisions :</strong>
+            <ul class="forecast-list">
+              <% city.forecast.forEach(function(day) { %>
+                <li class="forecast-item">
+                  <strong><%= day.day %> (<%= day.date %>)</strong><br>
+                  <%= day.skytextday %><br>
+                  <span>🌡️ <%= day.low %>°C - <%= day.high %>°C</span><br>
+                  <span>💧 Précip. : <%= day.precip %>%</span>
+                </li>
+              <% }) %>
+            </ul>
+          </div>
+        </div>
+      <% }) %>
+    <% } %>
+  </div>
+</body>
+</html>
