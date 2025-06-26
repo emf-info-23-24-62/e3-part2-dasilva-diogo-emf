@@ -1,0 +1,21 @@
+services :
+  weather-api :
+    #construit l'image par rapport au dockerfile dans le dossier weather-api
+    build : ./weather-api
+    #ouvre les ports 8080
+    ports : 
+      - "8080:8080"
+    #lance le script "start" qui est dans le package.json
+    command : ["npm", "run", "start"]
+
+  
+  weather-frontend :
+    #construit l'image par rapport au dockerfile dans le dossier frontend
+    build : ./frontend
+    #ouvre les ports 3000
+    ports :
+      - "3000:3000"
+    #lance le script "start" qui est dans le package.json
+    command : ["npm", "run", "start"]
+
+
