@@ -1,0 +1,9 @@
+FROM node:20
+
+#copie les fichiers frontend dans le container
+COPY ./weather-frontend .
+
+WORKDIR ./weather-frontend
+
+#installe les dépendances
+RUN npm install

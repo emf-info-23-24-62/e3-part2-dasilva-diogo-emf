@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
 app.post('/search', async (req, res) => {
   const location = req.body.location;
   try {
-    const response = await axios.get(`http://????????:8080/location/${encodeURIComponent(location)}`);
+    const response = await axios.get(`http://weather-api:8080/location/${encodeURIComponent(location)}`);
     const data = response.data;
     res.render('index', { data, error: null, location });
   } catch (error) {
